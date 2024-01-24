@@ -17,6 +17,7 @@
 *.sublime-workspace
 *.idea/*
 *.vs/*
+*.vscode/*
 
 # Generated folders
 build/*
