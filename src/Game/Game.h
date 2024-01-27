@@ -3,8 +3,10 @@
 #include "View/Window.h"
 #include "Asset/ResourceHandler.h"
 #include "Asset/ResourceIdentifiers.h"
+#include "Scene/Entity.h"
 
-#include "SFML/Graphics/RectangleShape.hpp"
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <entt/entity/registry.hpp>
 
 class Game {
 public:
@@ -22,6 +24,7 @@ private:
 private:
     sf::RectangleShape m_Box;
     ResourceHandler<sf::Texture, Textures::ID> ResourceHandle;
+    Entity entity;
 
 private:
     const sf::Time m_TimePerFrame;

@@ -3,15 +3,27 @@ project(app LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
-# sfml 2.6.x
+# SFML 2.6.x
 include(FetchContent)
 FetchContent_Declare(SFML
         GIT_REPOSITORY https://github.com/SFML/SFML.git
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
+# EnTT
+include(ExternalProject)
+ExternalProject_Add(
+    entt
+    PREFIX ${CMAKE_BINARY_DIR}/entt
+    GIT_REPOSITORY https://github.com/skypjack/entt.git
+    GIT_TAG master  # or specify the commit hash you need
+    UPDATE_DISCONNECTED 1
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+)
+ExternalProject_Get_Property(entt source_dir binary_dir)
+include_directories(${source_dir}/src)
+
 # spdlog 1.12.0
-include(FetchContent)
 FetchContent_Declare(
   spdlog
   GIT_REPOSITORY "https://github.com/gabime/spdlog.git"
@@ -19,7 +31,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/spdlog-src/include")
-
 
 file(GLOB SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
@@ -34,6 +45,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-system sfml-audio)
+
+add_dependencies(${PROJECT_NAME} entt)
 
 if(WIN32)
     add_custom_command(
