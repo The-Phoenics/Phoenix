@@ -21,15 +21,17 @@ FetchContent_MakeAvailable(spdlog)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/_deps/spdlog-src/include")
 
 
+file(GLOB SOURCE_FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Game/*cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/View/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Asset/*.hpp
+)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-add_executable(${PROJECT_NAME}
-        src/main.cpp
-        src/View/Window.cpp
-        src/View/Window.h
-        src/Game/Game.cpp
-        src/Game/Game.h
-)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-system sfml-audio)
 

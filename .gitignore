@@ -25,3 +25,7 @@ assets/*
 CMake/Build/*
 CMake/Install/*
 abandoned
+
+# other
+*.sh
+*.pdf

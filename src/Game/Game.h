@@ -1,6 +1,9 @@
 #pragma once
 
 #include "View/Window.h"
+#include "Asset/ResourceHandler.h"
+#include "Asset/ResourceIdentifiers.h"
+
 #include "SFML/Graphics/RectangleShape.hpp"
 
 class Game {
@@ -18,6 +21,7 @@ private:
 
 private:
     sf::RectangleShape m_Box;
+    ResourceHandler<sf::Texture, Textures::ID> ResourceHandle;
 
 private:
     const sf::Time m_TimePerFrame;

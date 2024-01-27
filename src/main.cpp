@@ -5,12 +5,10 @@
 
 int main()
 {
-    Logger::init();
-    LOG_INFO(info msg);
-    LOG_WARN(warn msg);
-    LOG_ERROR(error msg);
+#ifdef DEBUG
+    Logger::Init();
+#endif
 
     Game game;
     game.run();
-    return 0;
 }
