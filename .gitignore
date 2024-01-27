@@ -17,11 +17,9 @@
 *.sublime-workspace
 *.idea/*
 *.vs/*
-*.vscode/*
 
 # Generated folders
 build/*
-assets/*
 CMake/Build/*
 CMake/Install/*
 abandoned
