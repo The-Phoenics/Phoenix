@@ -12,41 +12,46 @@
 class Logger
 {
 public:
-    static void Init()
-    {
-        Logger();
-    }
-
     static void LogInfo(const char *message)
     {
         if (m_Logger.get() == nullptr)
-            spdlog::error("{}!", "Initialize Logger. Logger::init()");
+            Logger();
         else
-            m_Logger->info("{}!", message);
+            m_Logger->info("{}", message);
     }
 
     static void LogWarn(const char *message)
     {
         if (m_Logger.get() == nullptr)
-            spdlog::error("{}!", "Initialize Logger. Logger::init()");
+            Logger();
         else
-            m_Logger->warn("{}!", message);
+            m_Logger->warn("{}", message);
     }
 
     static void LogError(const char *message)
     {
         if (m_Logger.get() == nullptr)
-            spdlog::error("{}!", "Initialize Logger. Logger::init()");
+            Logger();
         else
-            m_Logger->error("{}!", message);
+            m_Logger->error("{}", message);
+    }
+
+private:
+    static std::shared_ptr<spdlog::logger> getInstance()
+    {
+        if (m_Logger.get())
+            Logger();
+        return m_Logger;
     }
 
 private:
     inline static std::shared_ptr<spdlog::logger> m_Logger{nullptr};
     Logger()
     {
-        this->m_Logger = spdlog::stdout_color_mt("console");
-        m_Logger->set_pattern("%^[%T] %n: %v%$");
+        // Initialize Logger
+        this->m_Logger = spdlog::stdout_color_mt("LOG MESSAGE");
+        m_Logger->set_pattern("%^[%T:%e] %n: %v%$");
+
     }
     ~Logger() = default;
     Logger(const Logger &) = delete;

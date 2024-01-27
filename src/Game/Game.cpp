@@ -55,9 +55,6 @@ void Game::render()
 
 void Game::init()
 {
-#ifdef DEBUG
-    LOG_INFO(Initializing Game...);
-#endif
     try
     {
         ResourceHandle.load(Textures::Player, "../assets/ACharDown.png");
@@ -75,7 +72,7 @@ void Game::init()
     m_Box.setTextureRect({0, 0, m_Box.getTextureRect().width / 2, m_Box.getTextureRect().height / 2});
 
 #ifdef DEBUG
-    LOG_INFO(Assets Loaded Successfully);
-    LOG_INFO(Player Initialized);
+    LOG_INFO(Assets Loaded Successfully.);
+    LOG_INFO(Game Initialized Successfully.);
 #endif
 }
