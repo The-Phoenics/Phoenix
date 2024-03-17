@@ -1,11 +1,11 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
 
-struct Position {
+struct Position2D {
     float x, y;
 };
 
-struct Veloctiy {
+struct Veloctiy2D {
     float x, y;
 };
 

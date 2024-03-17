@@ -1,5 +1,8 @@
 #include "Game.h"
 #include "Utils/Debug.h"
+#include "Scene/Scene.h"
+#include "Scene/EntityManager.h"
+#include "Scene/Components.h"
 
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Window/Event.hpp"
@@ -8,9 +11,19 @@
 #include <iostream>
 
 Game::Game()
-    : m_Window("Application Window", 800, 600), m_Box(sf::Vector2f(100, 100)), m_TimePerFrame(sf::seconds(1.f / 60.f))
+    : m_Window("Application Window", 800, 600)
+    , m_Box(sf::Vector2f(100, 100))
+    , m_TimePerFrame(sf::seconds(1.f / 60.f))
 {
+    m_GameScene = new Scene();
+    m_Player = EntityManager::createEntity(m_GameScene, EntityTag::PLAYER);
+    EntityManager::addComponent<Position2D>(m_Player, Position2D{ 5.5f, 7.5f });
     this->init();
+}
+
+Game::~Game()
+{
+    delete m_GameScene;
 }
 
 void Game::processEvents()
@@ -22,12 +35,24 @@ void Game::processEvents()
             m_Window.get().close();
         }
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        m_Box.setPosition(m_Box.getPosition().x, m_Box.getPosition().y - 0.5f);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        m_Box.setPosition(m_Box.getPosition().x - 0.5f, m_Box.getPosition().y);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        m_Box.setPosition(m_Box.getPosition().x, m_Box.getPosition().y + 0.5f);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        m_Box.setPosition(m_Box.getPosition().x + 0.3f, m_Box.getPosition().y);
 }
 
 void Game::run()
 {
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
+    auto position = EntityManager::getComponent<Position2D>(m_Player);
+    std::cout << "Position: " << "[" << position.x << ", " << position.y << "]" << std::endl;
+
     while (this->m_Window.get().isOpen())
     {
         processEvents();

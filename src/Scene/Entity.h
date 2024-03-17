@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Scene/Scene.h"
+#include "EntityTag.h"
+#include "Scene.h"
+
+#include <entt/entt.hpp>
 
 class Entity {
 public:
@@ -8,6 +11,7 @@ public:
     ~Entity() = default;
     Entity(const Entity&) = default;
 
-private:
-    
+    EntityTag Tag;
+    entt::entity EntityID;
+    Scene* EntityScene;
 };

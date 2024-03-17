@@ -4,6 +4,7 @@
 #include "Asset/ResourceHandler.h"
 #include "Asset/ResourceIdentifiers.h"
 #include "Scene/Entity.h"
+#include "Scene/Scene.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <entt/entity/registry.hpp>
@@ -11,7 +12,9 @@
 class Game {
 public:
     Game();
-    ~Game() = default;
+    ~Game();
+    Game(const Game&) = delete;
+    void operator=(const Game&) = delete;
 
     void run();
 
@@ -24,9 +27,11 @@ private:
 private:
     sf::RectangleShape m_Box;
     ResourceHandler<sf::Texture, Textures::ID> ResourceHandle;
-    Entity entity;
 
 private:
     const sf::Time m_TimePerFrame;
     Window m_Window;
+
+    Scene* m_GameScene;
+    Entity m_Player;
 };

@@ -19,11 +19,10 @@ public:
     ~Scene() = default;
     Scene(const Scene &) = default;
 
-    template <typename T>
-    void addComponent(T component);
-
-    template <typename T>
-    void getComponent(T component);
+    // get registery
+    entt::registry* getRegistery() {
+        return this->m_Registery.get();
+    }
 
 private:
     std::unique_ptr<entt::registry> m_Registery;
