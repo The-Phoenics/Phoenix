@@ -4,6 +4,9 @@
 #include "Scene/EntityManager.h"
 #include "Scene/Components.h"
 
+#include "Scene/Systems/PhysicsSystem.h"
+#include "Scene/Systems/RenderSystem.h"
+
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Window/Event.hpp"
 #include "SFML/Window/Keyboard.hpp"
@@ -63,6 +66,8 @@ void Game::run()
             processEvents();
             update(m_TimePerFrame);
         }
+
+        update(timeSinceLastUpdate);
         render();
     }
 }
@@ -70,11 +75,13 @@ void Game::run()
 void Game::update(sf::Time elapsedTime)
 {
     // update
+    PhysicsSystem(m_GameScene->getPhysicsWorld());
 }
 
 void Game::render()
 {
     // render
+    RenderSystem();
     m_Window.render({&m_Box});
 }
 

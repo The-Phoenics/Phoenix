@@ -4,12 +4,13 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src",
+                "${workspaceFolder}/build/_deps/box2d-src/include",
+                "${workspaceFolder}/build/_deps/sfml-src/include",
                 "${workspaceFolder}/build/_deps/spdlog-src/include",
-                "${workspaceFolder}/build/_deps/sfml-src/include"
+                "${workspaceFolder}/build/entt/include"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++14",
             "intelliSenseMode": "linux-clang-x64"

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <entt/entity/registry.hpp>
 #include <memory>
+#include <entt/entity/registry.hpp>
+#include <box2d/box2d.h>
 
 /*
 * Each scene maintains its respective entitiy's data (*Components) 
@@ -14,10 +15,15 @@ class Scene
 public:
     Scene()
         : m_Registery(std::make_unique<entt::registry>())
+        , m_phWorld(std::make_unique<b2World>(b2Vec2{ 0.f, 0.f }))
     {
     }
-    ~Scene() = default;
+    virtual ~Scene() = default;
     Scene(const Scene &) = default;
+
+    b2World* getPhysicsWorld() {
+        return this->m_phWorld.get();
+    }
 
     // get registery
     entt::registry* getRegistery() {
@@ -26,6 +32,10 @@ public:
 
 private:
     std::unique_ptr<entt::registry> m_Registery;
+    
+    const int32 velocityIterations = 6;
+    const int32 positionIterations = 2;
+    std::unique_ptr<b2World> m_phWorld;
 };
 
 #include "Scene.inl"
