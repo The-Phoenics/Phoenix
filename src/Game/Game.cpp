@@ -91,7 +91,7 @@ void Game::init()
 {
     try
     {
-        ResourceHandle.load(Textures::Player, "../assets/ACharDown.png");
+        ResourceHandle.load(Textures::Player, "assets/ACharDown.png");
     }
     catch (const std::exception &e)
     {

@@ -1,9 +1,14 @@
-# SFGame
+# Phoenix Engine
+
+An evolving, lightweight 2d game engine.
+
+---
 
 ### Libraries
-- entt (ECS)
-- spdlog (Logging)
-- SFML (2D Graphics, Input Handling)
+- entt (entity component system)
+- Sfml (graphics amd input handling)
+- Box2D (2d physics)
+- spdlog (logging)
 
 ### Build
 
@@ -12,9 +17,16 @@
 git clone https://github.com/Karan-Semwal/SFGame.git
 ```
 
-2. Open a terminal (*Powershell* for windows) into cloned directory.
+2. Open a terminal into cloned repository.
 
-3. Run the following commands:
+3. Generate build using *cmake*
+```bash
+$ cmake -S . -B build -G "Unix Makefiles"
 ```
- clear; cmake -S . -B build -G "Unix Makefiles"; cd build; make; ./app.exe; cd ..
+
+4. Build
+```bash
+$ cmake --build build
 ```
+
+5. Run the executable generated inside build folder (*app.exe* or *app*)
