@@ -7,7 +7,7 @@
 /*
 * Each scene maintains its respective entitiy's data (*Components) 
 * Scene should manage all its entities (updating and rendering)
-*
+* A scene has: a entt registery, box2d world
 */
 
 class Scene
@@ -15,11 +15,11 @@ class Scene
 public:
     Scene()
         : m_Registery(std::make_unique<entt::registry>())
-        , m_phWorld(std::make_unique<b2World>(b2Vec2{ 0.f, 0.f }))
+        , m_phWorld(std::make_unique<b2World>(b2Vec2{ 0.f, -5.5f }))
     {
     }
     virtual ~Scene() = default;
-    Scene(const Scene &) = default;
+    Scene(const Scene &) = delete;
 
     b2World* getPhysicsWorld() {
         return this->m_phWorld.get();
@@ -32,9 +32,6 @@ public:
 
 private:
     std::unique_ptr<entt::registry> m_Registery;
-    
-    const int32 velocityIterations = 6;
-    const int32 positionIterations = 2;
     std::unique_ptr<b2World> m_phWorld;
 };
 

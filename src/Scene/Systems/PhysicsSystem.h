@@ -1,16 +1,30 @@
 #pragma once
 
+#include "Scene/Scene.h"
+#include "Scene/Components.h"
+
 #include <box2d/b2_world.h>
+#include <entt/entity/registry.hpp>
 
-inline void Step(b2World* world, float timeStep, int velocityIterations, int positionIterations);
+#include <iostream>
 
-inline void PhysicsSystem(b2World* world)
+// Initalize all physics world
+void InitPhysics(Scene* scene)
 {
-    // update the physics world
-    Step(world, 1.0f / 30.f, 6, 2);
+    std::cout << "Inialized Physics" << std::endl;
+    entt::registry* reg = scene->getRegistery();
+    auto view = reg->view<Position2D>();
+
+    for (auto e: view) {
+        Entity entity = { e, scene };
+        auto& pos = entity.getComponent<Position2D>(entity);
+        std::cout << "Position: " << pos.x << ", " << pos.y << std::endl;
+    }
 }
 
-inline void Step(b2World* world, float timeStep, int velocityIterations, int positionIterations)
+// Update the physics world
+inline void PhysicsSystem(b2World* box2dWorld)
 {
-    world->Step(timeStep, velocityIterations, positionIterations);
+    // update the physics world
+    box2dWorld->Step(1.0f / 30.f, 6, 2);
 }

@@ -1,11 +1,11 @@
 #include "Game.h"
 #include "Utils/Debug.h"
 #include "Scene/Scene.h"
-#include "Scene/EntityManager.h"
 #include "Scene/Components.h"
 
 #include "Scene/Systems/PhysicsSystem.h"
 #include "Scene/Systems/RenderSystem.h"
+#include "Scene/Components.h"
 
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Window/Event.hpp"
@@ -19,8 +19,13 @@ Game::Game()
     , m_TimePerFrame(sf::seconds(1.f / 60.f))
 {
     m_GameScene = new Scene();
-    m_Player = EntityManager::createEntity(m_GameScene, EntityTag::PLAYER);
-    EntityManager::addComponent<Position2D>(m_Player, Position2D{ 5.5f, 7.5f });
+
+    // CHECK: for testing working of ecs + box2d
+    m_Player = Entity::createEntity(m_GameScene, EntityTag::PLAYER);
+    m_Player.addComponent<Position2D>(m_Player, Position2D{ 5.5f, 7.5f });
+    m_Player.addComponent<Boxcollider>(m_Player, Boxcollider());
+    
+    // initalize engine
     this->init();
 }
 
@@ -52,9 +57,6 @@ void Game::run()
 {
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
-
-    auto position = EntityManager::getComponent<Position2D>(m_Player);
-    std::cout << "Position: " << "[" << position.x << ", " << position.y << "]" << std::endl;
 
     while (this->m_Window.get().isOpen())
     {
@@ -107,4 +109,6 @@ void Game::init()
     LOG_INFO(Assets Loaded Successfully.);
     LOG_INFO(Game Initialized Successfully.);
 #endif
+
+    InitPhysics(m_GameScene);
 }
