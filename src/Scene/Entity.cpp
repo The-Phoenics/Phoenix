@@ -12,6 +12,6 @@ Entity Entity::createEntity(Scene* scene, EntityTag tag)
     Entity entity;
     entity.Tag = tag;
     entity.EntityScene = scene;
-    entity.EntityID =  scene->getRegistery()->create();
+    entity.EntityID = scene->getRegistery()->create();
     return entity;
 }

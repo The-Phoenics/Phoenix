@@ -1,5 +1,5 @@
 #pragma once
-#include "SFML/Graphics/RenderWindow.hpp"
+#include <SFML/Graphics.hpp>
 
 class Window {
 public:
@@ -9,6 +9,8 @@ public:
     Window& operator=(const Window&) = delete;
     sf::RenderWindow& get() { return this->m_window; };
 
+    void draw(sf::Sprite& sprite);
+    void draw(sf::RectangleShape& sprite);
     void render(const std::initializer_list<sf::Drawable*> drawableList);
 
 private:

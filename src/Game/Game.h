@@ -27,11 +27,12 @@ private:
 private:
     sf::RectangleShape m_Box;
     ResourceHandler<sf::Texture, Textures::ID> ResourceHandle;
-
+ 
 private:
     const sf::Time m_TimePerFrame;
     Window m_Window;
-
     Scene* m_GameScene;
-    Entity m_Player;
+
+    Entity box;
+    Entity block;
 };

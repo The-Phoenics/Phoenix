@@ -15,15 +15,32 @@
 
 Game::Game()
     : m_Window("Application Window", 800, 600)
-    , m_Box(sf::Vector2f(100, 100))
     , m_TimePerFrame(sf::seconds(1.f / 60.f))
 {
     m_GameScene = new Scene();
 
-    // CHECK: for testing working of ecs + box2d
-    m_Player = Entity::createEntity(m_GameScene, EntityTag::PLAYER);
-    m_Player.addComponent<Transform>(m_Player, { 5.5f, 7.5f });
-    m_Player.addComponent<Rigidbody>(m_Player, Rigidbody());
+    // load texture
+    try {
+        ResourceHandle.load(Textures::Player, "assets/ACharDown.png");
+    }
+    catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+
+    // TEST: for testing working of all integration
+    box = Entity::createEntity(m_GameScene, EntityTag::PLAYER);
+    box.addComponent<Transform>(Transform(350.f, 200.f));
+    box.addComponent<Boxcollider>(Boxcollider({40.f / 2, 40.f / 2}));
+    box.addComponent<Rigidbody>(Rigidbody(Physics::PhysicsBodyType::DYNAMIC));
+    box.addComponent<Sprite>(Sprite({40.f, 40.f}, sf::Color::White));
+    // m_Player.addComponent<Sprite>(Sprite(ResourceHandle.get(Textures::Player), sf::Color::White, sf::Vector2f(50.f, 50.f)));
+
+    // block
+    block = Entity::createEntity(m_GameScene, EntityTag::ENVIRONMENT);
+    block.addComponent<Transform>(Transform(200.f, 500.f));
+    block.addComponent<Boxcollider>(Boxcollider({400.f / 2, 20.f / 2}));
+    block.addComponent<Rigidbody>(Rigidbody(Physics::PhysicsBodyType::STATIC));
+    block.addComponent<Sprite>(Sprite({400.f, 20.f}, sf::Color::Blue));
 
     // initalize engine
     this->init();
@@ -43,14 +60,6 @@ void Game::processEvents()
             m_Window.get().close();
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        m_Box.setPosition(m_Box.getPosition().x, m_Box.getPosition().y - 0.5f);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        m_Box.setPosition(m_Box.getPosition().x - 0.5f, m_Box.getPosition().y);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        m_Box.setPosition(m_Box.getPosition().x, m_Box.getPosition().y + 0.5f);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        m_Box.setPosition(m_Box.getPosition().x + 0.3f, m_Box.getPosition().y);
 }
 
 void Game::run()
@@ -84,31 +93,15 @@ void Game::render()
 {
     // render
     Render::Draw(m_Window, m_GameScene);
-    m_Window.render({&m_Box});
 }
 
 void Game::init()
 {
-    try
-    {
-        ResourceHandle.load(Textures::Player, "assets/ACharDown.png");
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-
-    sf::Texture &player_texture = ResourceHandle.get(Textures::Player);
-    m_Box.setSize({48.f, 48.f});
-    m_Box.setScale({2.f, 2.f});
-    m_Box.setPosition(sf::Vector2f(200.f, 200.f));
-    m_Box.setTexture(&player_texture);
-    m_Box.setTextureRect({0, 0, m_Box.getTextureRect().width / 2, m_Box.getTextureRect().height / 2});
-
 #ifdef DEBUG
     LOG_INFO("Assets Loaded Successfully");
     LOG_INFO("Game Initialized Successfully");
 #endif
 
+    // Initialize physics world
     Physics::Init(m_GameScene);
 }

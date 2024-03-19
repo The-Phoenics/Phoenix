@@ -11,19 +11,15 @@
 
 void Physics::Init(Scene *scene)
 {
-    entt::registry *reg = scene->getRegistery();
-    auto view = reg->view<Rigidbody>();
-
+    auto view = scene->getRegistery()->view<Rigidbody>();
     // create physics bodies into box2d world
     for (auto e : view)
     {
         Entity entity = {e, scene};
-
         auto &health = entity.getComponent<Health>(); // SEGF: does not have component and health is invalid reference now
         // std::cout << "health: " << health.value << std::endl;
         auto &rb2d = entity.getComponent<Rigidbody>();
         auto &transform = entity.getComponent<Transform>();
-        std::cout << (unsigned int)entity.EntityID << std::endl;
         std::cout << "Position: " << transform.x << ", " << transform.y << std::endl;
         std::cout << "Rotation: " << transform.rotation << std::endl;
 

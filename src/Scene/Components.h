@@ -33,20 +33,47 @@ struct Veloctiy
 
 struct Sprite
 {
-    sf::Texture Texture;
-    sf::Color Color = sf::Color::Transparent;
+    sf::Vector2f SpriteSize = { 0.f, 0.f };
+    sf::Texture* Texture = nullptr;
+    sf::Color Color = sf::Color::White; // TODO: change to transparent and organize constructors
 
     Sprite() = default;
+    Sprite(const Sprite&) = default;
+    Sprite& operator=(const Sprite&) = default;
     ~Sprite() = default;
 
-    Sprite(sf::Texture& tex)
-        : Texture(tex), Color(sf::Color::Transparent) {}
-
     Sprite(sf::Color color)
-        : Texture(), Color(color) {}
+        : Color(color) {}
+
+    Sprite(sf::Texture& tex)
+        : Texture(&tex) {
+            info();
+        }
 
     Sprite(sf::Texture& tex, sf::Color color)
-        : Texture(tex), Color(color) {}
+        : Texture(&tex), Color(color) {
+            info();
+        }
+
+    Sprite(const sf::Vector2f& size, sf::Color color)
+        : Color(color), SpriteSize(size) {
+            info();
+        }
+
+    Sprite(sf::Vector2f& size, sf::Color color)
+        : Color(color), SpriteSize(size) {
+            info();
+        }
+
+    Sprite(sf::Texture& tex, sf::Color color, const sf::Vector2f& size)
+        : Texture(&tex), Color(color), SpriteSize(size) {
+            info();
+        }
+
+    void info() {
+        if (!this->Texture)
+            LOG_WARN(Texture is not provided!);
+    }
 };
 
 struct Health {
@@ -55,8 +82,14 @@ struct Health {
 
 // Physics
 struct Rigidbody {
-    b2Body* body;
-    Physics::PhysicsBodyType bodyType = Physics::PhysicsBodyType::DYNAMIC;
+    b2Body* body = nullptr;
+    Physics::PhysicsBodyType bodyType;;
+
+    Rigidbody()
+        : bodyType(Physics::PhysicsBodyType::DYNAMIC) {}
+
+    Rigidbody(Physics::PhysicsBodyType bodytype)
+        : bodyType(bodytype) {}
 };
 
 struct Boxcollider {
@@ -67,4 +100,8 @@ struct Boxcollider {
     float Friction = 0.5f;
     float Restitution = 0.f;
     float RestitutionThreshold = 0.5f;
+
+    Boxcollider() =  default;
+    Boxcollider(const b2Vec2& size)
+        : Size(size) {}
 };

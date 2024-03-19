@@ -15,7 +15,7 @@ class Scene
 public:
     Scene()
         : m_Registery(std::make_unique<entt::registry>())
-        , m_phWorld(std::make_unique<b2World>(b2Vec2{ 0.f, -5.5f }))
+        , m_phWorld(std::make_unique<b2World>(b2Vec2{ 0.f, 5.5f }))
     {
     }
     virtual ~Scene() = default;
