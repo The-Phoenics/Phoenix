@@ -12,6 +12,14 @@ An evolving, lightweight 2d game engine.
 
 ### Build
 
+#### Requirements
+
+- gcc compiler
+- GNU make
+- cmake 3.20 or higher
+
+<br>
+
 1. Clone the repository:
 ```
 git clone https://github.com/Karan-Semwal/SFGame.git
@@ -29,4 +37,4 @@ $ cmake -S . -B build -G "Unix Makefiles"
 $ cmake --build build
 ```
 
-5. Run the executable generated inside build folder (*app.exe* or *app*)
+5. Run the executable generated at root of the repository (*app.exe* or *app*)
