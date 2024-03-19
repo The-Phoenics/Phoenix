@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Scene.h"
+#include "Scene/Scene.h"
 
 class GameScene : public Scene {
 public:
-    GameScene() = default;
-    ~GameScene() = default;
+    GameScene();
+    ~GameScene();
 
     
 

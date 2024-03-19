@@ -2,6 +2,7 @@
 
 #include "EntityTag.h"
 #include "Scene.h"
+#include "Utils/Debug.h"
 
 #include <entt/entt.hpp>
 
@@ -24,9 +25,15 @@ public:
     }
 
     template<typename T>
-    void removeEntity(Scene* scene, Entity entity)
+    static void removeEntity(Scene* scene, Entity entity)
     {
         scene->getRegistery()->destroy(entity.EntityID);
+    }
+
+    template<typename T>
+    void removeEntity()
+    {
+        this->EntityScene->getRegistery()->destroy(this->EntityID);
     }
 
     template <typename T>
@@ -36,9 +43,30 @@ public:
     }
 
     template <typename T>
-    T& getComponent(Entity entity)
+    void addComponent(T component)
     {
-        return entity.EntityScene->getRegistery()->get<T>(entity.EntityID);
+        this->EntityScene->getRegistery()->emplace<T>(this->EntityID, component);
+    }
+
+    template <typename T>
+    T& getComponent()
+    {
+        if (!this->hasComponent<T>()) {
+            LOG_ERROR("Component does not exist.");
+        }
+        return this->EntityScene->getRegistery()->get<T>(this->EntityID);
+    }
+
+    template <typename T>
+    bool hasComponent()
+    {
+        return this->EntityScene->getRegistery()->any_of<T>(this->EntityID);
+    }
+
+    template <typename T>
+    bool hasComponent(Scene* scene, Entity entity)
+    {
+        return scene->getRegistery()->any_of<T>(entity.EntityID);
     }
 
     template<typename T>

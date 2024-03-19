@@ -1,13 +1,52 @@
 #pragma once
+#include "Scene/Systems/Physics.h"
+
 #include <SFML/System/Vector2.hpp>
 #include <box2d/b2_body.h>
 
-struct Position2D {
+#include <SFML/Graphics.hpp>
+
+struct Transform
+{
     float x, y;
+    float rotation;
+
+    Transform(float xpos, float ypos)
+        : x(xpos), y(ypos), rotation(0.f) {}
+
+    Transform(float xpos, float ypos, float rotation)
+        : x(xpos), y(ypos), rotation(rotation) {}
+
+    ~Transform() = default;
+    Transform(const Transform&) = default;
 };
 
-struct Veloctiy2D {
-    float x, y;
+struct Veloctiy
+{
+    float x;
+    float y;
+
+    Veloctiy() = default;
+    ~Veloctiy() = default;
+    Veloctiy(const Veloctiy&) = default;
+};
+
+struct Sprite
+{
+    sf::Texture Texture;
+    sf::Color Color = sf::Color::Transparent;
+
+    Sprite() = default;
+    ~Sprite() = default;
+
+    Sprite(sf::Texture& tex)
+        : Texture(tex), Color(sf::Color::Transparent) {}
+
+    Sprite(sf::Color color)
+        : Texture(), Color(color) {}
+
+    Sprite(sf::Texture& tex, sf::Color color)
+        : Texture(tex), Color(color) {}
 };
 
 struct Health {
@@ -17,6 +56,7 @@ struct Health {
 // Physics
 struct Rigidbody {
     b2Body* body;
+    Physics::PhysicsBodyType bodyType = Physics::PhysicsBodyType::DYNAMIC;
 };
 
 struct Boxcollider {

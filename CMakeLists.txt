@@ -49,6 +49,8 @@ file(GLOB SOURCE_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/View/*.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Systems/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Scenes/*.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/Asset/*.hpp
 )
 

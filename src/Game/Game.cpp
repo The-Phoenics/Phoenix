@@ -3,9 +3,9 @@
 #include "Scene/Scene.h"
 #include "Scene/Components.h"
 
-#include "Scene/Systems/PhysicsSystem.h"
-#include "Scene/Systems/RenderSystem.h"
 #include "Scene/Components.h"
+#include "Scene/Systems/Physics.h"
+#include "Scene/Systems/Render.h"
 
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Window/Event.hpp"
@@ -22,9 +22,9 @@ Game::Game()
 
     // CHECK: for testing working of ecs + box2d
     m_Player = Entity::createEntity(m_GameScene, EntityTag::PLAYER);
-    m_Player.addComponent<Position2D>(m_Player, Position2D{ 5.5f, 7.5f });
-    m_Player.addComponent<Boxcollider>(m_Player, Boxcollider());
-    
+    m_Player.addComponent<Transform>(m_Player, { 5.5f, 7.5f });
+    m_Player.addComponent<Rigidbody>(m_Player, Rigidbody());
+
     // initalize engine
     this->init();
 }
@@ -77,13 +77,13 @@ void Game::run()
 void Game::update(sf::Time elapsedTime)
 {
     // update
-    PhysicsSystem(m_GameScene->getPhysicsWorld());
+    Physics::Update(m_GameScene);
 }
 
 void Game::render()
 {
     // render
-    RenderSystem();
+    Render::Draw(m_Window, m_GameScene);
     m_Window.render({&m_Box});
 }
 
@@ -106,9 +106,9 @@ void Game::init()
     m_Box.setTextureRect({0, 0, m_Box.getTextureRect().width / 2, m_Box.getTextureRect().height / 2});
 
 #ifdef DEBUG
-    LOG_INFO(Assets Loaded Successfully.);
-    LOG_INFO(Game Initialized Successfully.);
+    LOG_INFO("Assets Loaded Successfully");
+    LOG_INFO("Game Initialized Successfully");
 #endif
 
-    InitPhysics(m_GameScene);
+    Physics::Init(m_GameScene);
 }
