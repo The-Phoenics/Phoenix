@@ -11,6 +11,7 @@ public:
 
     void draw(sf::Sprite& sprite);
     void draw(sf::RectangleShape& sprite);
+    void draw(sf::CircleShape& sprite);
     void render(const std::initializer_list<sf::Drawable*> drawableList);
 
 private:

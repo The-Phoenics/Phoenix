@@ -33,6 +33,7 @@ private:
     Window m_Window;
     Scene* m_GameScene;
 
+    Entity circle;
     Entity box;
     Entity block;
 };

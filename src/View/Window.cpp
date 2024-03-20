@@ -16,6 +16,11 @@ void Window::draw(sf::RectangleShape& sprite)
     this->m_window.draw(sprite);
 }
 
+void Window::draw(sf::CircleShape& sprite)
+{
+    this->m_window.draw(sprite);
+}
+
 void Window::render(const std::initializer_list<sf::Drawable*> drawableList)
 {
     m_window.clear(sf::Color::Black);

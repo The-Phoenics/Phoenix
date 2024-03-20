@@ -29,11 +29,18 @@ Game::Game()
 
     // TEST: for testing working of all integration
     box = Entity::createEntity(m_GameScene, EntityTag::PLAYER);
-    box.addComponent<Transform>(Transform(350.f, 200.f));
+    box.addComponent<Transform>(Transform(350.f, 230.f));
     box.addComponent<Boxcollider>(Boxcollider({40.f / 2, 40.f / 2}));
     box.addComponent<Rigidbody>(Rigidbody(Physics::PhysicsBodyType::DYNAMIC));
-    box.addComponent<Sprite>(Sprite({40.f, 40.f}, sf::Color::White));
+    box.addComponent<Sprite>(Sprite({40.f, 40.f}, sf::Color::Green));
     // m_Player.addComponent<Sprite>(Sprite(ResourceHandle.get(Textures::Player), sf::Color::White, sf::Vector2f(50.f, 50.f)));
+
+    float radii = 15.f;
+    circle = Entity::createEntity(m_GameScene, EntityTag::PLAYER);
+    circle.addComponent<Transform>(Transform(370.f, 100.f));
+    circle.addComponent<Circlecollider>(Circlecollider(radii));
+    circle.addComponent<Rigidbody>(Rigidbody(Physics::PhysicsBodyType::DYNAMIC));
+    circle.addComponent<CircleSprite>(CircleSprite(radii, sf::Color::White));
 
     // block
     block = Entity::createEntity(m_GameScene, EntityTag::ENVIRONMENT);

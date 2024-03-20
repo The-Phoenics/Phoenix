@@ -31,6 +31,41 @@ struct Veloctiy
     Veloctiy(const Veloctiy&) = default;
 };
 
+struct CircleSprite
+{
+    float Radius = 0.f;
+    sf::Color Color = sf::Color::White;
+    sf::Texture* Texture;
+
+    CircleSprite() = default;
+    CircleSprite(const CircleSprite&) = default;
+    CircleSprite& operator=(const CircleSprite&) = default;
+    ~CircleSprite() = default;
+
+    CircleSprite(float radius)
+        : Radius(radius) 
+    {
+        info();
+    }
+
+    CircleSprite(float radius, sf::Color color)
+        : Radius(radius), Color(color) 
+    {
+        info();
+    }
+
+    CircleSprite(sf::Texture& tex, sf::Color color, float radius)
+        : Texture(&tex), Color(color), Radius(radius) 
+    {
+        info();
+    }
+
+    void info() {
+        if (!this->Texture)
+            LOG_WARN(Texture is not provided!);
+    }
+};
+
 struct Sprite
 {
     sf::Vector2f SpriteSize = { 0.f, 0.f };
@@ -46,29 +81,34 @@ struct Sprite
         : Color(color) {}
 
     Sprite(sf::Texture& tex)
-        : Texture(&tex) {
-            info();
-        }
+        : Texture(&tex) 
+    {
+        info();
+    }
 
     Sprite(sf::Texture& tex, sf::Color color)
-        : Texture(&tex), Color(color) {
-            info();
-        }
+        : Texture(&tex), Color(color) 
+    {
+        info();
+    }
 
     Sprite(const sf::Vector2f& size, sf::Color color)
-        : Color(color), SpriteSize(size) {
-            info();
-        }
+        : Color(color), SpriteSize(size) 
+    {
+        info();
+    }
 
     Sprite(sf::Vector2f& size, sf::Color color)
-        : Color(color), SpriteSize(size) {
-            info();
-        }
+        : Color(color), SpriteSize(size) 
+    {
+        info();
+    }
 
     Sprite(sf::Texture& tex, sf::Color color, const sf::Vector2f& size)
-        : Texture(&tex), Color(color), SpriteSize(size) {
-            info();
-        }
+        : Texture(&tex), Color(color), SpriteSize(size) 
+    {
+        info();
+    }
 
     void info() {
         if (!this->Texture)
@@ -98,10 +138,29 @@ struct Boxcollider {
 
     float Density = 1.f;
     float Friction = 0.5f;
-    float Restitution = 0.f;
+    float Restitution = 0.3f; // bouncyness
     float RestitutionThreshold = 0.5f;
 
     Boxcollider() =  default;
     Boxcollider(const b2Vec2& size)
         : Size(size) {}
+};
+
+struct Circlecollider {
+    b2Vec2 Offset = { 0.f, 0.f };
+    b2Vec2 Size   = { 0.5f, 0.5f };
+
+    float Density = 1.f;
+    float Friction = 0.5f;
+    float Restitution = 1.5f;
+    float RestitutionThreshold = 0.5f;
+
+    float Radius = 0.f;
+
+    Circlecollider(float radius)
+        : Radius(radius) {}
+
+    Circlecollider() = default;
+    ~Circlecollider() = default;    
+    Circlecollider(const Circlecollider&) = default;
 };

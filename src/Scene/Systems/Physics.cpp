@@ -16,12 +16,11 @@ void Physics::Init(Scene *scene)
     for (auto e : view)
     {
         Entity entity = {e, scene};
-        auto &health = entity.getComponent<Health>(); // SEGF: does not have component and health is invalid reference now
+        // SEGF: does not have component and health is invalid reference now
+        // auto &health = entity.getComponent<Health>();
         // std::cout << "health: " << health.value << std::endl;
         auto &rb2d = entity.getComponent<Rigidbody>();
         auto &transform = entity.getComponent<Transform>();
-        std::cout << "Position: " << transform.x << ", " << transform.y << std::endl;
-        std::cout << "Rotation: " << transform.rotation << std::endl;
 
         // body definition
         b2BodyDef bodyDef;
@@ -45,6 +44,21 @@ void Physics::Init(Scene *scene)
             fixture.friction = bc2d.Friction;
             fixture.restitution = bc2d.Restitution;
             fixture.restitutionThreshold = bc2d.RestitutionThreshold;
+            body->CreateFixture(&fixture);
+        }
+
+        if (entity.hasComponent<Circlecollider>())
+        {
+            auto &cc2d = entity.getComponent<Circlecollider>();
+            b2CircleShape circleShape;
+            circleShape.m_radius = cc2d.Radius;
+
+            b2FixtureDef fixture;
+            fixture.shape = &circleShape;
+            fixture.density = cc2d.Density;
+            fixture.friction = cc2d.Friction;
+            fixture.restitution = cc2d.Restitution;
+            fixture.restitutionThreshold = cc2d.RestitutionThreshold;
             body->CreateFixture(&fixture);
         }
     }
