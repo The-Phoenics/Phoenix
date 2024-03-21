@@ -35,8 +35,11 @@ void Physics::Init(Scene *scene)
         if (entity.hasComponent<Boxcollider>())
         {
             auto &bc2d = entity.getComponent<Boxcollider>();
+            // bodyDef.position.Set(transform.x + (bc2d.Size.x / 2.f), transform.y + (bc2d.Size.y / 2.f));
+            // b2Body *body = entity.EntityScene->getPhysicsWorld()->CreateBody(&bodyDef);
+            // rb2d.body = body;
             b2PolygonShape boxShape;
-            boxShape.SetAsBox(bc2d.Size.x, bc2d.Size.y);
+            boxShape.SetAsBox(bc2d.Size.x / 2.f, bc2d.Size.y / 2.f);
 
             b2FixtureDef fixture;
             fixture.shape = &boxShape;
@@ -52,6 +55,7 @@ void Physics::Init(Scene *scene)
             auto &cc2d = entity.getComponent<Circlecollider>();
             b2CircleShape circleShape;
             circleShape.m_radius = cc2d.Radius;
+            // circleShape.m_p = b2Vec2(transform.x, transform.y);
 
             b2FixtureDef fixture;
             fixture.shape = &circleShape;

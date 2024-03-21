@@ -28,11 +28,12 @@ Game::Game()
     }
 
     // TEST: for testing working of all integration
+    sf::Vector2f size = { 40.f, 40.f };
     box = Entity::createEntity(m_GameScene, EntityTag::PLAYER);
     box.addComponent<Transform>(Transform(350.f, 230.f));
-    box.addComponent<Boxcollider>(Boxcollider({40.f / 2, 40.f / 2}));
+    box.addComponent<Boxcollider>(Boxcollider(size));
     box.addComponent<Rigidbody>(Rigidbody(Physics::PhysicsBodyType::DYNAMIC));
-    box.addComponent<Sprite>(Sprite({40.f, 40.f}, sf::Color::Green));
+    box.addComponent<Sprite>(Sprite(size, sf::Color::Green));
     // m_Player.addComponent<Sprite>(Sprite(ResourceHandle.get(Textures::Player), sf::Color::White, sf::Vector2f(50.f, 50.f)));
 
     float radii = 15.f;
@@ -43,11 +44,12 @@ Game::Game()
     circle.addComponent<CircleSprite>(CircleSprite(radii, sf::Color::White));
 
     // block
+    sf::Vector2f blocksize = { 400.f, 20.f };
     block = Entity::createEntity(m_GameScene, EntityTag::ENVIRONMENT);
-    block.addComponent<Transform>(Transform(200.f, 500.f));
-    block.addComponent<Boxcollider>(Boxcollider({400.f / 2, 20.f / 2}));
+    block.addComponent<Transform>(Transform(400.f, 500.f));
+    block.addComponent<Boxcollider>(Boxcollider(blocksize));
     block.addComponent<Rigidbody>(Rigidbody(Physics::PhysicsBodyType::STATIC));
-    block.addComponent<Sprite>(Sprite({400.f, 20.f}, sf::Color::Blue));
+    block.addComponent<Sprite>(Sprite(blocksize, sf::Color::Blue));
 
     // initalize engine
     this->init();

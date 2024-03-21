@@ -138,12 +138,15 @@ struct Boxcollider {
 
     float Density = 1.f;
     float Friction = 0.5f;
-    float Restitution = 0.3f; // bouncyness
+    float Restitution = 0.4f; // bouncyness
     float RestitutionThreshold = 0.5f;
 
     Boxcollider() =  default;
     Boxcollider(const b2Vec2& size)
         : Size(size) {}
+
+    Boxcollider(const sf::Vector2f& size)
+        : Size(b2Vec2(size.x, size.y)) {}
 };
 
 struct Circlecollider {
@@ -152,8 +155,8 @@ struct Circlecollider {
 
     float Density = 1.f;
     float Friction = 0.5f;
-    float Restitution = 1.5f;
-    float RestitutionThreshold = 0.5f;
+    float Restitution = 1.f;
+    float RestitutionThreshold = 0.f;
 
     float Radius = 0.f;
 

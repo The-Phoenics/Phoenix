@@ -36,7 +36,7 @@ void Render::RenderBoxSprite(Window& window, Sprite spriteComp, Transform transf
 
     sprite.setSize(sf::Vector2f(spriteComp.SpriteSize.x, spriteComp.SpriteSize.y));
     sprite.setFillColor(spriteComp.Color);
-    sprite.setPosition(sf::Vector2f{ transformComp.x, transformComp.y });
+    sprite.setPosition(sf::Vector2f{ transformComp.x - (spriteComp.SpriteSize.x / 2.f), transformComp.y - (spriteComp.SpriteSize.y / 2.f) });
     sprite.setRotation(transformComp.rotation);
     // draw on window
     window.draw(sprite);
@@ -50,7 +50,7 @@ void Render::RenderCircleSprite(Window& window, CircleSprite circleComp, Transfo
 
     sprite.setRadius(circleComp.Radius);
     sprite.setFillColor(circleComp.Color);
-    sprite.setPosition(sf::Vector2f{ transformComp.x, transformComp.y });
+    sprite.setPosition(sf::Vector2f{ transformComp.x - (circleComp.Radius / 2.f), transformComp.y - (circleComp.Radius / 2.f) });
     sprite.setRotation(transformComp.rotation);
     // draw on window
     window.draw(sprite);
