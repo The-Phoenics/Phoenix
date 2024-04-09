@@ -35,12 +35,12 @@ git clone https://github.com/The-Phoenics/Phoenix.git
 
 3. Generate build using *cmake*
 ```bash
-$ cmake -S . -B build -G "Unix Makefiles"
+cmake -S . -B build -G "Unix Makefiles"
 ```
 
 4. Build
 ```bash
-$ cmake --build build
+cmake --build build
 ```
 
 5. Run the executable generated at root of the repository (*app.exe* or *app*)
