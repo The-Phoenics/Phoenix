@@ -18,11 +18,17 @@ An evolving, lightweight 2d game engine.
 - GNU make
 - cmake 3.20 or higher
 
+#### Install dependencies for linux
+```bash
+sudo apt-get update
+sudo apt-get install libxrandr-dev libxcursor-dev libudev-dev libfreetype-dev libopenal-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev build-essential cmake libxi-dev libx11-dev
+```
+
 <br>
 
 1. Clone the repository:
 ```
-git clone https://github.com/Karan-Semwal/SFGame.git
+git clone https://github.com/The-Phoenics/Phoenix.git
 ```
 
 2. Open a terminal into cloned repository.
