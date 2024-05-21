@@ -14,7 +14,7 @@
 #include <iostream>
 
 Game::Game()
-    : m_Window("Application Window", 800, 600)
+    : m_Window("Game Window", 800, 600)
     , m_TimePerFrame(sf::seconds(1.f / 60.f))
 {
     m_GameScene = new Scene();
@@ -33,8 +33,14 @@ Game::Game()
     box.addComponent<Transform>(Transform(350.f, 230.f));
     box.addComponent<Boxcollider>(Boxcollider(size));
     box.addComponent<Rigidbody>(Rigidbody(Physics::PhysicsBodyType::DYNAMIC));
-    box.addComponent<Sprite>(Sprite(size, sf::Color::Green));
-    // m_Player.addComponent<Sprite>(Sprite(ResourceHandle.get(Textures::Player), sf::Color::White, sf::Vector2f(50.f, 50.f)));
+    // box.addComponent<Sprite>(Sprite(size, sf::Color::Green));
+    box.addComponent<Sprite>(Sprite(ResourceHandle.get(Textures::Player), sf::Color::White, sf::Vector2f(50.f, 50.f)));
+
+    sf::Sprite sp(ResourceHandle.get(Textures::Player));
+    sf::IntRect tr = { sf::Vector2i{0, 0}, sf::Vector2i{sp.getTextureRect().width / 2, sp.getTextureRect().height / 2} };
+
+    Sprite& sprite = box.getComponent<Sprite>();
+    sprite.TextRect = tr;
 
     float radii = 15.f;
     circle = Entity::createEntity(m_GameScene, EntityTag::PLAYER);

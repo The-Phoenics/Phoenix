@@ -8,6 +8,7 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <entt/entity/registry.hpp>
+#include <iostream>
 
 class Game {
 public:

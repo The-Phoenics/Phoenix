@@ -70,6 +70,7 @@ struct Sprite
 {
     sf::Vector2f SpriteSize = { 0.f, 0.f };
     sf::Texture* Texture = nullptr;
+    sf::IntRect TextRect;
     sf::Color Color = sf::Color::White; // TODO: change to transparent and organize constructors
 
     Sprite() = default;
@@ -77,37 +78,24 @@ struct Sprite
     Sprite& operator=(const Sprite&) = default;
     ~Sprite() = default;
 
-    Sprite(sf::Color color)
-        : Color(color) {}
-
-    Sprite(sf::Texture& tex)
-        : Texture(&tex) 
-    {
-        info();
-    }
-
     Sprite(sf::Texture& tex, sf::Color color)
         : Texture(&tex), Color(color) 
     {
-        info();
     }
 
     Sprite(const sf::Vector2f& size, sf::Color color)
         : Color(color), SpriteSize(size) 
     {
-        info();
     }
 
     Sprite(sf::Vector2f& size, sf::Color color)
         : Color(color), SpriteSize(size) 
     {
-        info();
     }
 
     Sprite(sf::Texture& tex, sf::Color color, const sf::Vector2f& size)
         : Texture(&tex), Color(color), SpriteSize(size) 
     {
-        info();
     }
 
     void info() {

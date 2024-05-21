@@ -38,6 +38,7 @@ void Render::RenderBoxSprite(Window& window, Sprite spriteComp, Transform transf
     sprite.setFillColor(spriteComp.Color);
     sprite.setPosition(sf::Vector2f{ transformComp.x - (spriteComp.SpriteSize.x / 2.f), transformComp.y - (spriteComp.SpriteSize.y / 2.f) });
     sprite.setRotation(transformComp.rotation);
+    sprite.setTextureRect(spriteComp.TextRect);
     // draw on window
     window.draw(sprite);
 }
