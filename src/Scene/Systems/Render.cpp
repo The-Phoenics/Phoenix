@@ -24,8 +24,6 @@ void Render::Draw(Window& window, Scene* scene)
         auto& circleComponent = entity.getComponent<CircleSprite>();
         RenderCircleSprite(window, circleComponent, transformComponent);
     }
-
-    window.get().display();
 }
 
 void Render::RenderBoxSprite(Window& window, Sprite spriteComp, Transform transformComp)
@@ -46,6 +44,7 @@ void Render::RenderBoxSprite(Window& window, Sprite spriteComp, Transform transf
 void Render::RenderCircleSprite(Window& window, CircleSprite circleComp, Transform transformComp)
 {
     sf::CircleShape sprite;
+    sprite.setOrigin(circleComp.Radius / 2.f, circleComp.Radius / 2.f);
     if (circleComp.Texture)
         sprite.setTexture(circleComp.Texture);
 
