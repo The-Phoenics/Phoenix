@@ -44,19 +44,19 @@ FetchContent_MakeAvailable(box2d)
 include_directories(${box2d_SOURCE_DIR}/include)
 
 file(GLOB SOURCE_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Game/*cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/View/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Systems/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Scenes/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Asset/*.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Game/*cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/View/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Scene/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Scene/Systems/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Scene/Scenes/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Asset/*.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Utils/*.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Utils/*.cpp
 )
 
 include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})

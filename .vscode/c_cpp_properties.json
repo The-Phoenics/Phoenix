@@ -8,7 +8,7 @@
                 "${workspaceFolder}/build/_deps/sfml-src/include",
                 "${workspaceFolder}/build/_deps/spdlog-src/include",
                 "${workspaceFolder}/build/entt/include",
-                "${workspaceFolder}/src",
+                "${workspaceFolder}/Phoenix"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",

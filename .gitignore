@@ -25,6 +25,7 @@ CMake/Install/*
 abandoned
 
 # other
+plans.txt
 *.sh
 *.pdf
 app

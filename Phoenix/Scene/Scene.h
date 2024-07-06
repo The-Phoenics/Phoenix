@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <entt/entity/registry.hpp>
+#include <entt/entt.hpp>
 #include <box2d/box2d.h>
 
 /*
@@ -18,8 +19,15 @@ public:
         , m_phWorld(std::make_unique<b2World>(b2Vec2{ 0.f, 5.5f }))
     {
     }
-    virtual ~Scene() = default;
-    Scene(const Scene &) = delete;
+
+    virtual ~Scene()
+    {
+        // clear the scene's registry
+        entt::registry* registry = m_Registery.get();
+        registry->clear();
+    }
+
+    Scene(const Scene&) = delete;
 
     b2World* getPhysicsWorld() {
         return this->m_phWorld.get();
