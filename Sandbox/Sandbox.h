@@ -10,9 +10,5 @@ public:
     Sandbox(const Sandbox&) = delete;
     Sandbox operator=(const Sandbox&) = delete;
 
-    void Run()
-    {
-        std::cout << "Hello from sandbox\n";
-    }
-
+    void Run();
 };
