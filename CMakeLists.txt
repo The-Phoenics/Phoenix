@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(app LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../)
-option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+# option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 # SFML 2.6.x
 include(FetchContent)
@@ -43,27 +43,8 @@ set(BOX2D_BUILD_UNIT_TESTS OFF CACHE BOOL "Build Box2D unit tests" FORCE)
 FetchContent_MakeAvailable(box2d)
 include_directories(${box2d_SOURCE_DIR}/include)
 
-file(GLOB SOURCE_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/main.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Game/*cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/View/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Scene/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Scene/Systems/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Scene/Scenes/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Asset/*.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Utils/*.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix/Utils/*.cpp
-)
-
-include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/Phoenix
-)
-
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-
-target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-system sfml-audio box2d)
-
-add_dependencies(${PROJECT_NAME} entt)
+add_subdirectory(Phoenix)
+add_subdirectory(Sandbox)
 
 if(WIN32)
     add_custom_command(

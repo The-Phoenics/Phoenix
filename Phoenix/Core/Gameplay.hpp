@@ -1,5 +1,5 @@
 #pragma once
-#include <phoenix.hpp>
+#include "../Phoenix.hpp"
 
 void test_entities(Scene* scene, ResourceHandler<sf::Texture, Textures::ID>& resHandler)
 {
