@@ -12,7 +12,8 @@ namespace Textures
     enum ID
     {
         Player,
-        Enemy
+        Enemy,
+        Rock
     };
 }
 

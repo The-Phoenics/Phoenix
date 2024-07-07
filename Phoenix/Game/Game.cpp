@@ -26,6 +26,7 @@ Game::Game()
     // load texture
     try {
         m_ResourceHandler.load(Textures::Player, "assets/ACharDown.png");
+        m_ResourceHandler.load(Textures::Rock, "assets/Rock.png");
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << '\n';

@@ -1,8 +1,10 @@
 #pragma once
 
-/***************************
+/*
+****************************
 *     Engine headers       *
-****************************/
+****************************
+*/
 
 #include "Asset/ResourceHandler.h"
 #include "Asset/ResourceIdentifiers.h"

@@ -18,13 +18,13 @@ void test_entities(Scene* scene, ResourceHandler<sf::Texture, Textures::ID>& res
     Sprite& sprite = box.getComponent<Sprite>();
     sprite.TextRect = tr;
 
-    // circle sprite
+    // rock sprite
     float radii = 15.f;
     Entity circle = Entity::createEntity(scene, EntityTag::PLAYER);
     circle.addComponent<Transform>(Transform(370.f, 100.f));
     circle.addComponent<Circlecollider>(Circlecollider(radii));
     circle.addComponent<Rigidbody>(Rigidbody(Physics::PhysicsBodyType::DYNAMIC));
-    circle.addComponent<CircleSprite>(CircleSprite(radii, sf::Color::White));
+    circle.addComponent<CircleSprite>(CircleSprite(resHandler.get(Textures::Rock), radii, sf::Color::White));
 
     // static rectangular floor
     sf::Vector2f blocksize = { 400.f, 20.f };

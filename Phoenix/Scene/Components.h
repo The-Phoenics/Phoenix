@@ -54,7 +54,7 @@ struct CircleSprite
         info();
     }
 
-    CircleSprite(sf::Texture& tex, sf::Color color, float radius)
+    CircleSprite(sf::Texture& tex, float radius, sf::Color color)
         : Texture(&tex), Color(color), Radius(radius) 
     {
         info();
@@ -119,7 +119,7 @@ struct Rigidbody {
     Rigidbody(Physics::PhysicsBodyType bodytype)
         : bodyType(bodytype) {}
 };
-    
+
 struct Boxcollider {
     b2Vec2 Offset = { 0.f, 0.f };
     b2Vec2 Size   = { 0.5f, 0.5f };

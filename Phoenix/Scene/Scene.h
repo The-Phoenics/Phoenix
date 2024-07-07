@@ -23,8 +23,9 @@ public:
     virtual ~Scene()
     {
         // clear the scene's registry
-        entt::registry* registry = m_Registery.get();
-        registry->clear();
+        // ERROR::SEGF 
+        // entt::registry* registry = m_Registery.get();
+        // registry->clear();
     }
 
     Scene(const Scene&) = delete;

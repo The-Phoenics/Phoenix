@@ -28,7 +28,7 @@ private:
 private:
     sf::RectangleShape m_Box;
     ResourceHandler<sf::Texture, Textures::ID> m_ResourceHandler;
- 
+
 private:
     const sf::Time m_TimePerFrame;
     Window m_Window;
