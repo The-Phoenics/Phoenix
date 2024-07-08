@@ -6,7 +6,7 @@ An evolving, lightweight 2d game engine.
 
 ### Libraries
 - entt (entity component system)
-- Sfml (graphics amd input handling)
+- SFML (graphics amd input handling)
 - Box2D (2d physics)
 - spdlog (logging)
 
@@ -14,9 +14,9 @@ An evolving, lightweight 2d game engine.
 
 #### Requirements
 
-- gcc compiler
+- g++ compiler
+- cmake 3.16 or higher
 - GNU make
-- cmake 3.20 or higher
 
 #### Install dependencies for linux
 ```bash
@@ -35,7 +35,7 @@ git clone https://github.com/The-Phoenics/Phoenix.git
 
 3. Generate build using *cmake*
 ```bash
-cmake -S . -B build -G "Unix Makefiles"
+cmake -S . -B build -G "Unix Makefiles" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 ```
 
 4. Build
