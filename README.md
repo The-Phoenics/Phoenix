@@ -44,3 +44,9 @@ cmake --build build
 ```
 
 5. Run the executable generated at root of the repository (*app.exe* or *app*)
+
+---
+
+https://github.com/user-attachments/assets/c70dbdbd-269c-44cf-94fa-e5ab766f01e0
+
+
