@@ -29,3 +29,4 @@ plans.txt
 *.sh
 *.pdf
 app
+.cache

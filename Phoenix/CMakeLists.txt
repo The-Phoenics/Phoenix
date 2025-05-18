@@ -17,5 +17,5 @@ include_directories(
 
 add_library(phoenix SHARED ${SOURCE_FILES})
 
+target_include_directories(phoenix PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(phoenix PRIVATE sfml-graphics sfml-system sfml-audio box2d)
-add_dependencies(phoenix entt)

@@ -14,4 +14,3 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC phoenix)
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-system sfml-audio box2d)
-add_dependencies(${PROJECT_NAME} entt)

@@ -4,12 +4,9 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/build/_deps/box2d-src/include",
-                "${workspaceFolder}/build/_deps/sfml-src/include",
-                "${workspaceFolder}/build/_deps/spdlog-src/include",
-                "${workspaceFolder}/build/entt/include",
-                "${workspaceFolder}/Phoenix"
+                "${workspaceFolder}/build/**"
             ],
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
             "defines": [],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",

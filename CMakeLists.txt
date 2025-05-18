@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(app LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../)
 # option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
@@ -12,17 +13,13 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 # EnTT
-include(ExternalProject)
-ExternalProject_Add(
+FetchContent_Declare(
     entt
-    PREFIX ${CMAKE_BINARY_DIR}/entt
     GIT_REPOSITORY https://github.com/skypjack/entt.git
-    GIT_TAG master  # or specify the commit hash you need
-    UPDATE_DISCONNECTED 1
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+    GIT_TAG master
 )
-ExternalProject_Get_Property(entt source_dir binary_dir)
-include_directories(${source_dir}/src)
+FetchContent_MakeAvailable(entt)
+include_directories(${entt_SOURCE_DIR}/src)
 
 # spdlog 1.12.0
 FetchContent_Declare(
